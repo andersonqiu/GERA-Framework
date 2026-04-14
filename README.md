@@ -8,29 +8,29 @@ A four-layer, open-source framework for cross-system financial data reconciliati
 ┌─────────────────────────────────────────────────────────────┐
 │                    GERA Framework                           │
 ├─────────────────────────────────────────────────────────────┤
-│  Layer 4: NIST CSF 2.0 Security Controls                   │
-│  ┌─────────────┐ ┌──────────────┐ ┌──────────────────────┐ │
-│  │ ABAC / RLS  │ │ Policy-as-   │ │ Compliance           │ │
-│  │ (Terraform) │ │ Code (TF)    │ │ Mapping              │ │
-│  └─────────────┘ └──────────────┘ └──────────────────────┘ │
+│  Layer 4: NIST CSF 2.0 Security Controls                    │
+│  ┌─────────────┐ ┌──────────────┐ ┌──────────────────────┐  │
+│  │ ABAC / RLS  │ │ Policy-as-   │ │ Compliance           │  │
+│  │ (Terraform) │ │ Code (TF)    │ │ Mapping              │  │
+│  └─────────────┘ └──────────────┘ └──────────────────────┘  │
 ├─────────────────────────────────────────────────────────────┤
 │  Layer 3: Governed Semantic Standardization                 │
-│  ┌─────────────┐ ┌──────────────┐ ┌──────────────────────┐ │
-│  │ Semantic     │ │ Audit Logger │ │ Hash-Chain           │ │
-│  │ Registry     │ │ (Append-Only)│ │ Verification         │ │
-│  └─────────────┘ └──────────────┘ └──────────────────────┘ │
+│  ┌─────────────┐ ┌──────────────┐ ┌──────────────────────┐  │
+│  │ Semantic    │ │ Audit Logger │ │ Hash-Chain           │  │
+│  │ Registry    │ │ (Append-Only)│ │ Verification         │  │
+│  └─────────────┘ └──────────────┘ └──────────────────────┘  │
 ├─────────────────────────────────────────────────────────────┤
 │  Layer 2: Multi-Layer Statistical Validation                │
-│  ┌─────────────┐ ┌──────────────┐ ┌──────────────────────┐ │
-│  │ Z-Score Gate│ │ Recon Checks │ │ Reasonableness       │ │
-│  │ (2.5σ/4.0σ)│ │ (Count/Amt)  │ │ (Period Variance)    │ │
-│  └─────────────┘ └──────────────┘ └──────────────────────┘ │
+│  ┌─────────────┐ ┌──────────────┐ ┌──────────────────────┐  │
+│  │ Z-Score Gate│ │ Recon Checks │ │ Reasonableness       │  │
+│  │ (2.5σ/4.0σ) │ │ (Count/Amt)  │ │ (Period Variance)    │  │
+│  └─────────────┘ └──────────────┘ └──────────────────────┘  │
 ├─────────────────────────────────────────────────────────────┤
 │  Layer 1: Deterministic Cross-System Reconciliation         │
-│  ┌─────────────┐ ┌──────────────┐ ┌──────────────────────┐ │
-│  │ Key Matcher │ │ Exception    │ │ FIFO Queue           │ │
-│  │ (Composite) │ │ Router       │ │ (SLA Tracking)       │ │
-│  └─────────────┘ └──────────────┘ └──────────────────────┘ │
+│  ┌─────────────┐ ┌──────────────┐ ┌──────────────────────┐  │
+│  │ Key Matcher │ │ Exception    │ │ FIFO Queue           │  │
+│  │ (Composite) │ │ Router       │ │ (SLA Tracking)       │  │
+│  └─────────────┘ └──────────────┘ └──────────────────────┘  │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -107,4 +107,4 @@ Apache License 2.0 — see [LICENSE](LICENSE).
 
 ## Author
 
-**Zhijun Qiu** — [GitHub](https://github.com/zhijunqiu)
+**Zhijun Qiu** — [GitHub](https://github.com/andersonqiu)
