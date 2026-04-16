@@ -16,3 +16,45 @@ env/
 *.so
 .DS_Store
 Thumbs.db
+
+# ---------------------------------------------------------------------------
+# Terraform — MUST NOT be committed
+# These files are auto-generated during `terraform init` / `terraform apply`
+# and contain sensitive data (resource IDs, variable values, sometimes
+# secrets).  Deleting any line below risks leaking cloud credentials.
+# ---------------------------------------------------------------------------
+# Local provider plugin cache and module downloads
+**/.terraform/
+**/.terraform.lock.hcl
+
+# State files — contain every resource attribute, including secrets
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+crash.log
+crash.*.log
+
+# Variable files — contain project IDs, customer IDs, real values
+*.tfvars
+*.tfvars.json
+!example.tfvars
+!*.tfvars.example
+
+# Plan files — snapshots of pending changes, may contain secrets
+*.tfplan
+*.tfplan.*
+
+# ---------------------------------------------------------------------------
+# Cloud credentials — NEVER commit
+# ---------------------------------------------------------------------------
+*-credentials.json
+*-service-account.json
+*-key.json
+gcp-key*.json
+.aws/
+.gcloud/
+credentials
+credentials.json
+.env
+.env.*
+!.env.example
