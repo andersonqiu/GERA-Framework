@@ -65,6 +65,10 @@ class AuditLogger:
         self._events: List[AuditEvent] = []
         self._last_hash: str = "genesis"
         self._lock = threading.Lock()
+        # Track oldest timestamp so we can skip O(n) cleanup scans when we
+        # know nothing could possibly have aged out.  Without this, log()
+        # becomes O(n) and append-heavy workloads degrade to O(n²).
+        self._oldest_timestamp: Optional[datetime] = None
 
     # ------------------------------------------------------------------
     # Internal helpers
@@ -104,9 +108,36 @@ class AuditLogger:
         Called inside the lock on every log() so memory is bounded.
         In production, events should be flushed to a persistent backend
         before they age out — this method only trims the in-memory copy.
+
+        Optimised: events are always appended in chronological order, so
+        we only need to scan when the oldest known timestamp is actually
+        past the retention cutoff.  Skipping the scan keeps log() O(1)
+        amortised instead of O(n) per call.
         """
+        if self._oldest_timestamp is None:
+            return
+
         cutoff = datetime.now(timezone.utc) - timedelta(days=self.retention_days)
-        self._events = [e for e in self._events if e.timestamp >= cutoff]
+        if self._oldest_timestamp >= cutoff:
+            return
+
+        # At least one event has expired — find the first survivor.
+        # Linear scan is fine here because this path is taken rarely
+        # (only after retention_days of continuous logging).
+        first_keep = 0
+        for i, e in enumerate(self._events):
+            if e.timestamp >= cutoff:
+                first_keep = i
+                break
+        else:
+            # Every event expired.
+            self._events = []
+            self._oldest_timestamp = None
+            return
+
+        if first_keep > 0:
+            self._events = self._events[first_keep:]
+            self._oldest_timestamp = self._events[0].timestamp
 
     # ------------------------------------------------------------------
     # Public API
@@ -154,6 +185,8 @@ class AuditLogger:
 
             self._events.append(event)
             self._last_hash = event_hash
+            if self._oldest_timestamp is None:
+                self._oldest_timestamp = timestamp
             self._cleanup_expired()
 
         return event

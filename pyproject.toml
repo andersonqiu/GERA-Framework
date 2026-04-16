@@ -43,6 +43,11 @@ Homepage = "https://github.com/zhijunqiu/gera-framework"
 Repository = "https://github.com/zhijunqiu/gera-framework"
 Documentation = "https://github.com/zhijunqiu/gera-framework#readme"
 
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["gera*"]
+exclude = ["tests*", "benchmarks*", "examples*", "terraform*"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]

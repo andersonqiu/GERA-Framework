@@ -97,6 +97,51 @@ pip install -e .
 pytest tests/ -v
 ```
 
+Tests are split into unit (`tests/test_reconciliation.py`, `tests/test_zscore_gate.py`)
+and integration (`tests/test_integration.py`). Integration tests exercise all four
+layers end-to-end under clean, mismatched, anomalous, and tampered scenarios.
+
+## Examples
+
+| Script | Scenario |
+|--------|----------|
+| `examples/basic_reconciliation.py` | Two-source reconciliation with all four layers |
+| `examples/multi_source_reconciliation.py` | Three-way GL ⇄ Processor ⇄ Warehouse reconciliation with classified exceptions |
+
+Run from the project root:
+
+```bash
+python examples/basic_reconciliation.py
+python examples/multi_source_reconciliation.py
+```
+
+## Performance
+
+GERA ships a deterministic benchmark suite that measures each layer's
+latency and throughput at enterprise-scale record counts.
+
+```bash
+python -m benchmarks.benchmark_reconciliation
+python -m benchmarks.benchmark_reconciliation --scales 10000 100000 --json
+```
+
+Representative results on a dual-core x86_64 (Python 3.10, NumPy 2.2):
+
+| Operation | n = 1,000 | n = 10,000 | Throughput |
+|-----------|-----------|------------|------------|
+| `DeterministicMatcher.match` | 2.1 ms | 29.2 ms | ≈ 340K rec/s |
+| `ZScoreGate.validate` | 2.6 ms | 24.3 ms | ≈ 410K rec/s |
+| `ReconciliationCheck.run_all` | 0.05 ms | 0.32 ms | ≈ 30M rec/s |
+| `AuditLogger.log` (append) | 14 ms | 160 ms | ≈ 63K events/s |
+| `AuditLogger.verify_chain` | 9 ms | 86 ms | ≈ 115K events/s |
+| `ExceptionRouter.route` | 1.7 ms | 17.6 ms | ≈ 570K rec/s |
+| `SemanticRegistry.register` | 2.1 ms | 21.3 ms | ≈ 470K rec/s |
+
+All measured operations are **linear in record count** — there are no
+hidden quadratic scans in the hot path. Absolute numbers vary with
+hardware; use the benchmark on your own deployment target for capacity
+planning.
+
 ## Publication
 
 Qiu, Z. (2026). "Data Engineering Patterns for Cross-System Reconciliation in Regulated Enterprises." *TechRxiv* (IEEE). DOI: pending.
