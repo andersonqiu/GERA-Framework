@@ -144,7 +144,7 @@ planning.
 
 ## Publication
 
-Qiu, Z. (2026). "Data Engineering Patterns for Cross-System Reconciliation in Regulated Enterprises." *TechRxiv* (IEEE). DOI: pending.
+Qiu, Z. (2026). "Data Engineering Patterns for Cross-System Reconciliation in Regulated Enterprises." DOI: pending.
 
 ## License
 
