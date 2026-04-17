@@ -3,6 +3,7 @@
 **Governed Enterprise Reconciliation Architecture**
 
 [![arXiv](https://img.shields.io/badge/arXiv-2604.15108-b31b1b.svg)](https://arxiv.org/abs/2604.15108)
+[![DOI](https://img.shields.io/badge/DOI-10.48550%2FarXiv.2604.15108-blue.svg)](https://doi.org/10.48550/arXiv.2604.15108)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 
@@ -150,7 +151,9 @@ planning.
 
 ## Publication
 
-Qiu, Z. (2026). *Data Engineering Patterns for Cross-System Reconciliation in Regulated Enterprises: Architecture, Anomaly Detection, and Governance.* arXiv:2604.15108 [cs.DB]. <https://arxiv.org/abs/2604.15108>
+Qiu, Z. (2026). *Data Engineering Patterns for Cross-System Reconciliation in Regulated Enterprises: Architecture, Anomaly Detection, and Governance.* arXiv:2604.15108 [cs.DB; cs.CY]. DOI: [10.48550/arXiv.2604.15108](https://doi.org/10.48550/arXiv.2604.15108). <https://arxiv.org/abs/2604.15108>
+
+Submitted 16 April 2026. 13 pages, 3 figures, 1 table. ACM classes: H.2.7, H.2.8, K.6.5.
 
 ## Citation
 
@@ -163,6 +166,8 @@ If you use this software or reference this architecture in academic work, please
   author  = {Qiu, Zhijun},
   journal = {arXiv preprint arXiv:2604.15108},
   year    = {2026},
+  month   = apr,
+  doi     = {10.48550/arXiv.2604.15108},
   url     = {https://arxiv.org/abs/2604.15108},
   archivePrefix = {arXiv},
   eprint  = {2604.15108},

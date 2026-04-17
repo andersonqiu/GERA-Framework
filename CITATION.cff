@@ -34,9 +34,18 @@ preferred-citation:
       given-names: "Zhijun"
       email: "qrit110@gmail.com"
   year: 2026
+  month: 4
+  date-published: "2026-04-16"
   journal: "arXiv preprint"
+  doi: "10.48550/arXiv.2604.15108"
   url: "https://arxiv.org/abs/2604.15108"
   identifiers:
+    - type: doi
+      value: "10.48550/arXiv.2604.15108"
+      description: "DOI assigned by arXiv"
     - type: other
       value: "arXiv:2604.15108"
-      description: "arXiv identifier"
+      description: "arXiv identifier (primary category: cs.DB; cross-listed: cs.CY)"
+    - type: other
+      value: "ACM CCS: H.2.7, H.2.8, K.6.5"
+      description: "ACM Computing Classification System codes"
