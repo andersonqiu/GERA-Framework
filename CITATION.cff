@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite both the software and the accompanying paper."
+title: "GERA Framework: Governed Enterprise Reconciliation Architecture"
+abstract: >
+  A four-layer, open-source framework for cross-system financial data
+  reconciliation, statistical validation, semantic governance, and NIST CSF 2.0
+  security controls in regulated enterprises.
+authors:
+  - family-names: "Qiu"
+    given-names: "Zhijun"
+    email: "qrit110@gmail.com"
+version: "0.1.0"
+date-released: "2026-04-16"
+license: Apache-2.0
+repository-code: "https://github.com/andersonqiu/GERA-Framework"
+url: "https://github.com/andersonqiu/GERA-Framework"
+keywords:
+  - reconciliation
+  - data-engineering
+  - financial-data
+  - SOX
+  - PCAOB
+  - NIST-CSF
+  - anomaly-detection
+  - audit
+  - governance
+preferred-citation:
+  type: article
+  title: >
+    Data Engineering Patterns for Cross-System Reconciliation in Regulated
+    Enterprises: Architecture, Anomaly Detection, and Governance
+  authors:
+    - family-names: "Qiu"
+      given-names: "Zhijun"
+      email: "qrit110@gmail.com"
+  year: 2026
+  journal: "arXiv preprint"
+  url: "https://arxiv.org/abs/2604.15108"
+  identifiers:
+    - type: other
+      value: "arXiv:2604.15108"
+      description: "arXiv identifier"

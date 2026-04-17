@@ -39,9 +39,10 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/zhijunqiu/gera-framework"
-Repository = "https://github.com/zhijunqiu/gera-framework"
-Documentation = "https://github.com/zhijunqiu/gera-framework#readme"
+Homepage = "https://github.com/andersonqiu/GERA-Framework"
+Repository = "https://github.com/andersonqiu/GERA-Framework"
+Documentation = "https://github.com/andersonqiu/GERA-Framework#readme"
+Preprint = "https://arxiv.org/abs/2604.15108"
 
 [tool.setuptools.packages.find]
 where = ["."]

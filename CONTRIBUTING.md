@@ -17,8 +17,8 @@ Thank you for your interest in contributing to the Governed Enterprise Reconcili
 
 ```bash
 # Clone the repo
-git clone https://github.com/zhijunqiu/gera-framework.git
-cd gera-framework
+git clone https://github.com/andersonqiu/GERA-Framework.git
+cd GERA-Framework
 
 # Install in development mode
 pip install -e ".[dev]"

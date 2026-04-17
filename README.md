@@ -2,7 +2,13 @@
 
 **Governed Enterprise Reconciliation Architecture**
 
+[![arXiv](https://img.shields.io/badge/arXiv-2604.15108-b31b1b.svg)](https://arxiv.org/abs/2604.15108)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+
 A four-layer, open-source framework for cross-system financial data reconciliation, statistical validation, semantic governance, and security controls in regulated enterprises.
+
+Companion code for the arXiv preprint *"Data Engineering Patterns for Cross-System Reconciliation in Regulated Enterprises: Architecture, Anomaly Detection, and Governance"* ([arXiv:2604.15108](https://arxiv.org/abs/2604.15108)).
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -144,7 +150,27 @@ planning.
 
 ## Publication
 
-Qiu, Z. (2026). "Data Engineering Patterns for Cross-System Reconciliation in Regulated Enterprises." DOI: pending.
+Qiu, Z. (2026). *Data Engineering Patterns for Cross-System Reconciliation in Regulated Enterprises: Architecture, Anomaly Detection, and Governance.* arXiv:2604.15108 [cs.DB]. <https://arxiv.org/abs/2604.15108>
+
+## Citation
+
+If you use this software or reference this architecture in academic work, please cite the paper:
+
+```bibtex
+@article{qiu2026gera,
+  title   = {Data Engineering Patterns for Cross-System Reconciliation in Regulated Enterprises:
+             Architecture, Anomaly Detection, and Governance},
+  author  = {Qiu, Zhijun},
+  journal = {arXiv preprint arXiv:2604.15108},
+  year    = {2026},
+  url     = {https://arxiv.org/abs/2604.15108},
+  archivePrefix = {arXiv},
+  eprint  = {2604.15108},
+  primaryClass  = {cs.DB}
+}
+```
+
+A machine-readable [`CITATION.cff`](CITATION.cff) is also provided; GitHub will surface it automatically via the **"Cite this repository"** button in the sidebar.
 
 ## License
 
