@@ -36,6 +36,9 @@ class EventType(Enum):
     SYSTEM_EVENT = "system_event"
 
 
+GENESIS_HASH = "0" * 64
+
+
 def _deep_freeze(obj: Any) -> Any:
     """Recursively convert *obj* into an immutable structure.
 
@@ -145,19 +148,19 @@ class AuditLogger:
     def __init__(self, retention_days: int = 2555):
         self.retention_days = retention_days
         self._events: List[AuditEvent] = []
-        self._last_hash: str = "genesis"
+        self._last_hash: str = GENESIS_HASH
         self._lock = threading.Lock()
         # Track oldest timestamp so we can skip O(n) cleanup scans when we
         # know nothing could possibly have aged out.  Without this, log()
         # becomes O(n) and append-heavy workloads degrade to O(n²).
         self._oldest_timestamp: Optional[datetime] = None
         # Chain anchor: event_hash of the most recently purged event, or
-        # "genesis" if nothing has been purged yet. verify_chain() starts
+        # 64 zeros if nothing has been purged yet. verify_chain() starts
         # from this anchor so events surviving retention purge remain
         # verifiable. Without it, the first surviving event's
         # previous_hash (which points at a purged predecessor) would be
         # falsely flagged as tampering.
-        self._anchor_hash: str = "genesis"
+        self._anchor_hash: str = GENESIS_HASH
         # Monotonic event-ID counter. Must be independent of
         # ``len(self._events)`` so that retention purge cannot reuse an
         # already-assigned ID. The ID is also the ordering key for the
@@ -214,7 +217,7 @@ class AuditLogger:
         advanced to the ``event_hash`` of the most recently purged event
         so that :meth:`verify_chain_detail` can still validate the
         remaining events — the first surviving event's ``previous_hash``
-        now points at the anchor rather than at a genesis that no longer
+        now points at the anchor rather than at a genesis hash that no longer
         corresponds to the current set of events.
         """
         if self._oldest_timestamp is None:
@@ -371,7 +374,7 @@ class AuditLogger:
 
         # Start from the chain anchor, which advances every time retention
         # purges events. For a logger that has never purged anything the
-        # anchor is still "genesis", matching the very first log() call.
+        # anchor is still 64 zeros, matching the very first log() call.
         expected_prev = self._anchor_hash
         for i, event in enumerate(self._events):
             if event.previous_hash != expected_prev:

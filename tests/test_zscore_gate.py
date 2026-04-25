@@ -130,6 +130,38 @@ class TestZScoreGate:
         assert result.anomalies
         assert result.anomalies[0].record_id == "MY-002"
 
+    def test_record_ids_length_mismatch_raises(self):
+        with pytest.raises(ValueError, match="record_ids length"):
+            self.gate.validate(
+                values=[100.0, 101.0],
+                historical_values=_HISTORICAL,
+                record_ids=["REC-001"],
+            )
+
+    def test_segment_length_mismatch_raises(self):
+        with pytest.raises(ValueError, match="segments length"):
+            self.gate.validate_segmented(
+                values=[100.0, 101.0],
+                segments=["revenue"],
+                historical_values={"revenue": _HISTORICAL},
+            )
+
+    def test_segmented_record_ids_length_mismatch_raises(self):
+        with pytest.raises(ValueError, match="record_ids length"):
+            self.gate.validate_segmented(
+                values=[100.0, 101.0],
+                segments=["revenue", "revenue"],
+                historical_values={"revenue": _HISTORICAL},
+                record_ids=["REC-001"],
+            )
+
+    def test_baseline_timestamp_length_mismatch_raises(self):
+        with pytest.raises(ValueError, match="timestamps length"):
+            self.gate.compute_baseline(
+                historical_values=[100.0, 101.0],
+                timestamps=[],
+            )
+
     def test_invalid_params_raise(self):
         with pytest.raises(ValueError):
             ZScoreGate(sigma_threshold=-1)

@@ -161,6 +161,11 @@ class ZScoreGate:
             whether sufficient observations exist for a reliable baseline.
         """
         if timestamps is not None:
+            if len(timestamps) != len(historical_values):
+                raise ValueError(
+                    "timestamps length must match historical_values length "
+                    f"({len(timestamps)} != {len(historical_values)})"
+                )
             cutoff = datetime.now(timezone.utc) - timedelta(days=self.window_days)
             filtered = [
                 v for v, t in zip(historical_values, timestamps)
@@ -241,6 +246,11 @@ class ZScoreGate:
 
         if record_ids is None:
             record_ids = [f"record-{i}" for i in range(len(values))]
+        elif len(record_ids) != len(values):
+            raise ValueError(
+                "record_ids length must match values length "
+                f"({len(record_ids)} != {len(values)})"
+            )
 
         if not is_valid:
             flagged_anomalies = [
@@ -327,6 +337,16 @@ class ZScoreGate:
         """
         if record_ids is None:
             record_ids = [f"record-{i}" for i in range(len(values))]
+        elif len(record_ids) != len(values):
+            raise ValueError(
+                "record_ids length must match values length "
+                f"({len(record_ids)} != {len(values)})"
+            )
+        if len(segments) != len(values):
+            raise ValueError(
+                "segments length must match values length "
+                f"({len(segments)} != {len(values)})"
+            )
 
         all_anomalies = []
         passed = flagged = blocked = 0

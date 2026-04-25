@@ -146,20 +146,26 @@ class CSF2ControlMapper:
         return self._index.get(control_id)
 
     def compliance_summary(self) -> Dict[str, Any]:
-        """Generate compliance summary."""
+        """Generate a NIST CSF 2.0 control-mapping summary.
+
+        This is evidence-mapping metadata, not a compliance attestation.
+        Independent assessment is required before any implementation should
+        be described as certified, compliant, or fully implemented.
+        """
         return {
             "framework": "NIST CSF 2.0",
             "total_controls_mapped": len(self.mappings),
             "functions_covered": sorted(
                 set(m.function_name for m in self.mappings)
             ),
-            "coverage_pct": 100.0,  # All mapped controls are implemented
+            "mapping_coverage_pct": 100.0,
+            "assessment_scope": "engineering_control_mapping_not_certification",
             "controls": [
                 {
                     "id": m.control_id,
                     "function": m.function_name,
                     "category": m.category,
-                    "implemented": True,
+                    "evidence_status": "mapped",
                 }
                 for m in self.mappings
             ],

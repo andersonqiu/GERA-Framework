@@ -3,6 +3,7 @@
 import json
 import pytest
 from dataclasses import FrozenInstanceError
+from pathlib import Path
 
 from gera.reconciliation.deterministic_matcher import (
     DeterministicMatcher,
@@ -220,6 +221,16 @@ class TestExceptionRouter:
         assert len(first) == 1
         assert len(second) == 0  # Already escalated — no double-escalation.
         assert exc.status == ExceptionStatus.ESCALATED
+
+    def test_warehouse_sla_views_match_python_enum_values(self):
+        repo_root = Path(__file__).resolve().parents[1]
+        for sql_path in (
+            repo_root / "sql" / "bigquery" / "04_exceptions_queue.sql",
+            repo_root / "sql" / "athena" / "04_exceptions_queue.sql",
+        ):
+            sql = sql_path.read_text()
+            assert sql.count("CASE UPPER(e.severity)") == 2
+            assert "WHEN 'CRITICAL' THEN 1" in sql
 
 
 # ---------------------------------------------------------------------------
@@ -470,7 +481,8 @@ class TestCSF2ControlMapper:
         assert summary["framework"] == "NIST CSF 2.0"
         assert "total_controls_mapped" in summary
         assert "functions_covered" in summary
-        assert "coverage_pct" in summary
+        assert "mapping_coverage_pct" in summary
+        assert summary["assessment_scope"] == "engineering_control_mapping_not_certification"
         assert "controls" in summary
         assert isinstance(summary["controls"], list)
         assert len(summary["controls"]) > 0
@@ -487,7 +499,7 @@ class TestCSF2ControlMapper:
         for ctrl in summary["controls"]:
             assert "id" in ctrl
             assert "function" in ctrl
-            assert "implemented" in ctrl
+            assert ctrl["evidence_status"] == "mapped"
 
     def test_generate_audit_report_is_string(self):
         report = self.mapper.generate_audit_report()
